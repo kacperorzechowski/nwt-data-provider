@@ -1,4 +1,4 @@
-import { add } from '../../app/helpers'
+import { add } from '@/helpers'
 
 describe('helpers test', () => {
   it('adds two digits', () => {

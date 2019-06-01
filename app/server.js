@@ -1,7 +1,6 @@
 import express from 'express'
-import routes from './routes'
-
-const PORT = 5000
+import routes from '@/routes'
+import { PORT } from '@/config'
 
 export const server = express()
 
