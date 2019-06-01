@@ -1,22 +1,36 @@
 import express from 'express'
 import { API_PATH } from '@/config'
+import { extractResponse } from '@/helpers'
 import Giphy from '@/models/Giphy'
 
 const app = express()
 
-app.get(`${API_PATH}/images`, (request, response) => {
-  Giphy.getTrendings()
+app.get(`${API_PATH}/images`, async (request, response) => {
+  let data = []
+
+  await Giphy.getTrendings()
     .then((res) => {
-      response.status(200).send({
-        data: res.data.data.map((item) => ({
-          fixed_width: item.images.fixed_width,
-          original_still: item.images.original_still
-        }))
-      })
+      extractResponse(data, res.data.data)
     })
     .catch((error) => {
-      response.status(500).send({error})
+      response.status(500).send({ error })
     })
+
+  response.status(200).send({ data })
+})
+
+app.get(`${API_PATH}/images/search/:query`, async (request, response) => {
+  let data = []
+
+  await Giphy.search(request.params.query)
+    .then((res) => {
+      extractResponse(data, res.data.data)
+    })
+    .catch((error) => {
+      response.status(500).send({ error })
+    })
+
+  response.status(200).send({ data })
 })
 
 export default app
