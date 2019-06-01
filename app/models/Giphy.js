@@ -12,5 +12,8 @@ const params = {
 export default {
   getTrendings (limit = 10) {
     return Giphy.get(`/trending?limit=${limit}`, { params })
+  },
+  search (payload) {
+    return Giphy.get(`/search?q=${payload}`, { params })
   }
 }
