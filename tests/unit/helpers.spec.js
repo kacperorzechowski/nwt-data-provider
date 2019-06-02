@@ -1,27 +1,51 @@
-import { extractResponse } from '../../app/helpers'
+import { extractGiphyResponse, extractPixabayResponse } from '../../app/helpers'
 
-const mockedResponse = [
+const giphyResponse = [
   {
     a: 'test',
     b: 'test',
     images: {
-      original_still: 'url',
-      fixed_width: 'url'
+      fixed_width: {
+        url: 'url'
+      },
+      original_still: {
+        url: 'url'
+      }
     }
   }
 ]
 
+const pixabayResponse = [
+  {
+    a: 'test',
+    b: 'test',
+    previewURL: 'url',
+    webformatURL: 'url'
+  }
+]
+
 describe('helpers test', () => {
-  it('returns mapped array', () => {
+  it('returns mapped array from giphy response', () => {
     // given
     let data = []
     const desiredArray = [{
-      original_still: 'url',
-      fixed_width: 'url'
+      previewFormat: 'url',
+      webFormat: 'url'
     }]
     // when
-    extractResponse(data, mockedResponse)
-    console.log(data)
+    extractGiphyResponse(data, giphyResponse)
+    // then
+    expect(data).toEqual(desiredArray)
+  })
+  it('returns mapped array from pixabay response', () => {
+    // given
+    let data = []
+    const desiredArray = [{
+      previewFormat: 'url',
+      webFormat: 'url'
+    }]
+    // when
+    extractPixabayResponse(data, pixabayResponse)
     // then
     expect(data).toEqual(desiredArray)
   })
