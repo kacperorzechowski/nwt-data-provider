@@ -2,8 +2,7 @@ export function extractGiphyResponse (data, res) {
   data.push(
     ...res
       .map((item) => ({
-          previewFormat: item.images.fixed_width.url,
-          webFormat: item.images.original_still.url
+          previewFormat: item.images.fixed_width.url
         })
       )
   )
@@ -11,7 +10,6 @@ export function extractGiphyResponse (data, res) {
 
 export function extractPixabayResponse (data, res) {
   data.push(...res.map((item) => ({
-    previewFormat: item.previewURL,
-    webFormat: item.webformatURL
+    previewFormat: item.webformatURL
   })))
 }
