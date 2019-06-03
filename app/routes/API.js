@@ -47,7 +47,7 @@ app.get(`${API_PATH}/images/search/:query`, async (request, response) => {
       response.status(500).send({ error })
     })
 
-  await Pixabay.search()
+  await Pixabay.search(request.params.query)
     .then((res) => {
       extractPixabayResponse(data, res.data.hits)
     })
