@@ -1,4 +1,8 @@
 # NWT Image Provider
+## Setting up
+* ``npm install`` installs dependencies
+* ``npm run serve:hot`` starts webpack server with hot reloading feature
+
 ## The project
 NWT Image Provider is part of Schibsted recruitment task.
 The main idea of app is to provide data for front-end application from external APIs.
